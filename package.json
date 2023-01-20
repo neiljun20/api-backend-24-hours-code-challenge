@@ -1,0 +1,19 @@
+{
+  "name": "api-backend-24-hours-code-challenge",
+  "version": "1.0.0",
+  "description": "To create a consumable RESTful API for storing and retrieving images.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neiljun20/api-backend-24-hours-code-challenge.git"
+  },
+  "author": "Neiljun Cataag <neiljuncataag@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neiljun20/api-backend-24-hours-code-challenge/issues"
+  },
+  "homepage": "https://github.com/neiljun20/api-backend-24-hours-code-challenge#readme"
+}
