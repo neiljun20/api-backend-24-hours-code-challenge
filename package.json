@@ -4,7 +4,10 @@
   "description": "To create a consumable RESTful API for storing and retrieving images.",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "test": "jest",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint ./src --fix"
   },
   "repository": {
     "type": "git",
@@ -18,5 +21,13 @@
   "homepage": "https://github.com/neiljun20/api-backend-24-hours-code-challenge#readme",
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.48.2",
+    "@typescript-eslint/parser": "^5.48.2",
+    "eslint": "^8.32.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.9.4"
   }
 }
