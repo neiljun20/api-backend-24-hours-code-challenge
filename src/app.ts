@@ -1,4 +1,5 @@
 import express, {Express, Request, Response} from "express";
+import router from "./routes/index";
 
 export default class App{
   
@@ -9,12 +10,8 @@ export default class App{
   }
 
   public build = () => {
-  	this.server.get("/healthcheck", (req:Request, res:Response) => {
-  		res.send({
-  			"status": "ok"
-  		});
-  	});
-
-  	return this.server;
-  }
+    this.server.use(router);
+    return this.server;
+  };
+  
 }
