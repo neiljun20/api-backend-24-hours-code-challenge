@@ -20,9 +20,11 @@
   },
   "homepage": "https://github.com/neiljun20/api-backend-24-hours-code-challenge#readme",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "express": "^4.18.2"
   },
   "devDependencies": {
+    "@types/express": "^4.17.15",
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
