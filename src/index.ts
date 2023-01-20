@@ -5,7 +5,7 @@ try{
 
   const server = new App().build();
   server.listen(Number(PORT) || 3000, async () => {
-  	console.log(`Server ready at http://localhost:${PORT}`);
+    console.log(`Server ready at http://localhost:${PORT}`);
     await connectDB();
   });
 

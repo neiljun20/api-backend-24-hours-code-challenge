@@ -1,4 +1,4 @@
-import express, {Express, Request, Response} from "express";
+import express, {Express} from "express";
 import router from "./routes/index";
 
 export default class App{
@@ -7,6 +7,7 @@ export default class App{
 
   constructor(){
     this.server = express();
+    this.server.use(express.json());
   }
 
   public build = () => {
