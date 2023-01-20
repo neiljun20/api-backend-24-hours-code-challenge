@@ -2,10 +2,11 @@ import { Router } from "express";
 import UsersController from "../controllers/user.controller";
 import validationMiddleware from "../middlewares/validation.middleware";
 import { createUserSchema } from "../schemas/user.schema";
+import { Routes } from '../interfaces/routes.interface';
 
-class UserRoutes{
+class UserRoutes implements Routes {
   public router = Router();
-  private path = "/users";
+  public path = "/users";
   private usersController = new UsersController();
 
   constructor() {
