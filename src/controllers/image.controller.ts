@@ -18,7 +18,7 @@ class ImageController {
     }
   };
 
-  public imagesId = async (req:any, res: Response, next: NextFunction) => {
+  public imagesId = async (req:Request, res: Response, next: NextFunction) => {
     try {
       const id = req.params.id;
       const getImagesId = await this.imageService.imagesId(id);
@@ -28,6 +28,21 @@ class ImageController {
         hits: getImagesId.hits + 1,
         uri: getImagesId.uri
       });
+
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public update = async (req:any, res: Response, next: NextFunction) => {
+    try {
+      const id = req.params.id;
+      const user = req.user;
+      const data = req.body;
+
+      const updateImage = await this.imageService.update(id, data, user);
+      
+      res.status(201).json({ data: updateImage, message: "update" });
 
     } catch (error) {
       next(error);

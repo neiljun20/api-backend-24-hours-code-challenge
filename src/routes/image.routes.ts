@@ -17,6 +17,7 @@ class ImageRoute implements Routes {
   private initializeRoutes() {
     this.router.get(`${this.path}`, authMiddleware, this.imageController.images);
     this.router.get(`${this.path}/:id`, authMiddleware, this.imageController.imagesId);
+    this.router.patch(`${this.path}/:id`, authMiddleware, this.imageController.update);
   }
 }
 
