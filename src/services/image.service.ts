@@ -30,8 +30,16 @@ class ImageService {
 
   }
 
-  public findByPexelsId = async (pexelsId:number) : Promise<any> => {
-    return await this.image.findOne({ pexelsId });
+  public imagesId = async (id:string) : Promise<Image> => {
+    const image = await this.image.findById(id);
+
+    if(!image) throw new Error("not found");
+
+    let res = await this.image.findByIdAndUpdate(id, { hits: image.hits + 1 });
+
+    if(!res) throw new Error("not found");
+
+    return res;
   }
   
 }

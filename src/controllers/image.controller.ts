@@ -18,6 +18,22 @@ class ImageController {
     }
   };
 
+  public imagesId = async (req:any, res: Response, next: NextFunction) => {
+    try {
+      const id = req.params.id;
+      const getImagesId = await this.imageService.imagesId(id);
+      
+      res.status(201).json({
+        id: getImagesId._id,
+        hits: getImagesId.hits + 1,
+        uri: getImagesId.uri
+      });
+
+    } catch (error) {
+      next(error);
+    }
+  }
+
 }
 
 export default ImageController;
