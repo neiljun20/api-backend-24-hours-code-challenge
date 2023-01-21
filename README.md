@@ -32,3 +32,5 @@ password: A222aaa#1
 ```
 
 I recommend to import the postman collection file `24 hour coding challenge.postman_collection.json`
+
+to see the API documentions go to http://localhost:3000/docs
