@@ -1,6 +1,6 @@
 import { object, string, TypeOf } from "zod";
 
-export const createUserSchema = object({
+export const signUpUserSchema = object({
   body: object({
     password: string({
       required_error: "Password is required"
@@ -23,4 +23,18 @@ export const createUserSchema = object({
   }),
 });
 
-export type CreateUserInput = TypeOf<typeof createUserSchema>["body"];
+export const loginUserSchema = object({
+  body: object({
+    password: string({
+      required_error: "Password is required"
+    }),
+    email: string({
+      required_error: "Email is required",
+    })
+      .email("Not a valid email")
+  })
+});
+
+export type SignUpUserInput = TypeOf<typeof signUpUserSchema>["body"];
+
+export type LoginUserInput = TypeOf<typeof loginUserSchema>["body"];

@@ -8,6 +8,7 @@ export default class App{
   constructor(){
     this.server = express();
     this.server.use(express.json());
+    this.server.use(express.urlencoded({ extended: true }));
   }
 
   public build = () => {

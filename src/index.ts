@@ -1,6 +1,7 @@
 import App from "./app";
 import { PORT } from "./config/index";
 import connectDB from "./utils/connectDB";
+
 try{
 
   const server = new App().build();

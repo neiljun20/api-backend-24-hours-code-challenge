@@ -1,10 +1,10 @@
 import { Router, Request, Response } from "express";
-import UserRoutes from "./user.routes";
+import AuthRoutes from "./auth.routes";
 
-const userRoutes = new UserRoutes();
 const router:Router = Router();
+const authRoutes = new AuthRoutes();
 
 router.get("/healthcheck", (req:Request, res:Response) => res.sendStatus(200));
-router.use(userRoutes.router);
+router.use(authRoutes.router);
 
 export default router;
