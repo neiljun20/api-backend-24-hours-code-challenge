@@ -60,6 +60,18 @@ class ImageService {
 
     return res;
   }
+
+  public create = async (imageData:any, user:User) : Promise<Image> => {
+    if(user.role == "user"){
+      imageData.owner = user._id;
+    }
+
+    if(!imageData.hits){
+      imageData.hits = 1;
+    }
+
+    return await this.image.create({ ...imageData });
+  }
   
 }
 
