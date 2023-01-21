@@ -9,7 +9,8 @@ class AuthController {
   public signUp = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userData:User = req.body;
-      userData["role"] = "user";
+      userData.role = "user";
+      userData.passwordResetToken = "";
       
       const signUpUserData:User = await this.authService.signUp(userData);
 
@@ -31,14 +32,24 @@ class AuthController {
     }
   };
 
-  public logOut = async (req:RequestWithUser, res: Response, next: NextFunction) => {
+  public logOut = async (req:any, res: Response, next: NextFunction) => {
     try {
       const userData:User = req.user;
-
       const logOutUserData: User = await this.authService.logout(userData);
 
       res.setHeader("Set-Cookie", ["Authorization=; Max-age=0"]);
       res.status(200).json({ data: logOutUserData, message: "logout" });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public forgotPassword = async(req: Request, res: Response, next: NextFunction) => {
+    try {
+      const userData:User = req.body;
+      const forgotPasswordUserData: User = await this.authService.forgotPassword(userData);
+
+      res.status(200).json({ data: forgotPasswordUserData, message: "forgotPassword" });
     } catch (error) {
       next(error);
     }

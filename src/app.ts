@@ -1,5 +1,5 @@
 import express, {Express} from "express";
-import cookieParser from 'cookie-parser';
+import cookieParser from "cookie-parser";
 import router from "./routes/index";
 
 export default class App{

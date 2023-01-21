@@ -1,5 +1,5 @@
 import App from "./app";
-import { PORT } from "./config/index";
+import { PORT } from "./config";
 import connectDB from "./utils/connectDB";
 
 try{
