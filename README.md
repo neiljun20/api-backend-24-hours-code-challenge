@@ -13,7 +13,7 @@ To create a consumable RESTful API for storing and retrieving images.
 * `pnpm start` - to start the build app.
 
 ### How to run:
-* Rename the .env.example to .env
+Rename the `.env.example` to `.env`
 ```
 pnpm install
 pnpm build
@@ -30,3 +30,5 @@ user account
 email: asddada@gmail.com
 password: A222aaa#1
 ```
+
+I recommend to import the postman collection 24 hour `coding challenge.postman_collection.json`
