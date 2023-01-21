@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { User } from "../interfaces/user.interface";
+import { RequestWithUser } from "../interfaces/auth.interface";
 import AuthService from "../services/auth.service";
 
 class AuthController {
@@ -30,9 +31,10 @@ class AuthController {
     }
   };
 
-  public logOut = async (req: Request, res: Response, next: NextFunction) => {
+  public logOut = async (req:RequestWithUser, res: Response, next: NextFunction) => {
     try {
-      const userData: User = req.body;
+      const userData:User = req.user;
+
       const logOutUserData: User = await this.authService.logout(userData);
 
       res.setHeader("Set-Cookie", ["Authorization=; Max-age=0"]);
