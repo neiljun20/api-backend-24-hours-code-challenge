@@ -31,4 +31,4 @@ email: asddada@gmail.com
 password: A222aaa#1
 ```
 
-I recommend to import the postman collection 24 hour `coding challenge.postman_collection.json`
+I recommend to import the postman collection `24 hour coding challenge.postman_collection.json`
