@@ -1,0 +1,301 @@
+tags:
+- name: auth
+  description: auth API
+
+- name: images
+  description: images API
+
+paths:
+# [POST] signup
+  /signup:
+    post:
+      tags:
+      - auth
+      summary: Sign up new user
+      parameters:
+      - name: body
+        in: body
+        description: user Data
+        required: true
+        schema:
+          $ref: '#/definitions/userSignup'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# [POST] login
+  /login:
+    post:
+      tags:
+      - auth
+      summary: login user
+      parameters:
+      - name: body
+        in: body
+        description: user Data
+        required: true
+        schema:
+          $ref: '#/definitions/userLogin'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# [POST] forgotPassword
+  /forgotPassword:
+    post:
+      tags:
+      - auth
+      summary: send password recovery token
+      parameters:
+      - name: body
+        in: body
+        description: user Data
+        required: true
+        schema:
+          $ref: '#/definitions/userForgotPassword'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# [POST] resetPassword
+  /resetPassword:
+    post:
+      tags:
+      - auth
+      summary: reset password
+      parameters:
+      - name: body
+        in: body
+        description: user Data
+        required: true
+        schema:
+          $ref: '#/definitions/resetPassword'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# [POST] logout
+  /logout:
+    post:
+      tags:
+      - auth
+      summary: logout Users
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+# [GET] images
+  /images:
+    get:
+      tags:
+      - images
+      summary: Find All Images
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# [POST] images
+    post:
+      tags:
+      - images
+      summary: add image
+      parameters:
+      - name: body
+        in: body
+        description: add image
+        required: true
+        schema:
+          $ref: '#/definitions/addImage'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# [GET] images/id
+  /images/{id}:
+    get:
+      tags:
+      - images
+      summary: Find Image By Id
+      parameters:
+      - name: id
+        in: path
+        description: Image Id
+        required: true
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# [PATCH] images/id
+    patch:
+      tags:
+      - images
+      summary: Update Image
+      parameters:
+      - name: body
+        in: body
+        description: user Data
+        required: true
+        schema:
+          $ref: '#/definitions/updateImage'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# [DELETE] users/id
+    delete:
+      tags:
+      - images
+      summary: Delete images By Id
+      parameters:
+      - name: id
+        in: path
+        description: images Id
+        required: true
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# definitions
+definitions:
+  userSignup:
+    type: object
+    required:
+        - email
+        - password
+        - passwordConfirmation
+    properties:
+      email:
+        type: string
+        description: user Email
+      password:
+        type: string
+        description: user Password
+      passwordConfirmation:
+        type: string
+        description: user Password Confirmation
+
+  userLogin:
+    type: object
+    required:
+        - email
+        - password
+    properties:
+      email:
+        type: string
+        description: user Email
+      password:
+        type: string
+        description: user Password
+
+  userForgotPassword:
+    type: object
+    required:
+        - email
+    properties:
+      email:
+        type: string
+        description: user Email
+
+  resetPassword:
+    type: object
+    required:
+        - passwordResetToken
+        - email
+        - password
+        - passwordConfirmation
+    properties:
+      passwordResetToken:
+        type: string
+        description: password Reset Token
+      email:
+        type: string
+        description: user Email
+      password:
+        type: string
+        description: user Password
+      passwordConfirmation:
+        type: string
+        description: user password Confirmation
+
+  updateImage:
+    type: object
+    required:
+        - hits
+        - uri
+    properties:
+      hits:
+        type: int
+        description: hits
+      uri:
+        type: string
+        description: image uri
+
+  addImage:
+    type: object
+    required:
+        - uri
+    properties:
+      uri:
+        type: string
+        description: password Reset Token
+      owner:
+        type: string
+        description: user Email
+
+
+
+schemes:
+ - https
+ - http
