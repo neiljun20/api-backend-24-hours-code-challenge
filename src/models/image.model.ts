@@ -13,10 +13,6 @@ const imageSchema: Schema = new Schema({
   hits: {
     type: Number,
     required: true
-  },
-  pexelsId: {
-    type: Number,
-    required: false
   }
 });
 
