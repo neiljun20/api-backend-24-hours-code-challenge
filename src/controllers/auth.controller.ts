@@ -1,10 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import { User } from "../interfaces/user.interface";
-import { RequestWithUser } from "../interfaces/auth.interface";
 import AuthService from "../services/auth.service";
 
 class AuthController {
-  public authService = new AuthService();
+  private authService = new AuthService();
 
   public signUp = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -26,7 +25,7 @@ class AuthController {
       const { cookie, findUser } = await this.authService.login(userData);
 
       res.setHeader("Set-Cookie", [cookie]);
-      res.status(200).json({ data: findUser, message: "login" });
+      res.status(201).json({ data: findUser, message: "login" });
     } catch (error) {
       next(error);
     }
@@ -38,7 +37,7 @@ class AuthController {
       const logOutUserData: User = await this.authService.logout(userData);
 
       res.setHeader("Set-Cookie", ["Authorization=; Max-age=0"]);
-      res.status(200).json({ data: logOutUserData, message: "logout" });
+      res.status(201).json({ data: logOutUserData, message: "logout" });
     } catch (error) {
       next(error);
     }
@@ -49,7 +48,7 @@ class AuthController {
       const userData:User = req.body;
       const forgotPasswordUserData: User = await this.authService.forgotPassword(userData);
 
-      res.status(200).json({ data: forgotPasswordUserData, message: "forgotPassword" });
+      res.status(201).json({ data: forgotPasswordUserData, message: "forgotPassword" });
     } catch (error) {
       next(error);
     }
@@ -60,7 +59,7 @@ class AuthController {
       const userData:User = req.body;
       const resetPasswordUserData: User = await this.authService.resetPassword(userData);
 
-      res.status(200).json({ data: resetPasswordUserData, message: "resetPassword" });
+      res.status(201).json({ data: resetPasswordUserData, message: "resetPassword" });
     } catch (error) {
       next(error);
     }

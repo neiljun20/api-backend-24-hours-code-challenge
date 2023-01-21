@@ -11,7 +11,7 @@ class AuthService {
 
   private sendgridService = new SendgridService();
 
-  public users = userModel;
+  private users = userModel;
 
   public signUp = async (userData: User): Promise<any> => {
 
