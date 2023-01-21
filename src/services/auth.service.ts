@@ -72,7 +72,22 @@ class AuthService {
     const updateUserById = await this.users.findByIdAndUpdate({_id:findUser._id}, {$set:{ passwordResetToken }}, {new:true});
     if (!updateUserById) throw new Error("User doesn't exist");
 
-    await this.sendgridService.sendPasswordResetToken(findUser.email, findUser._id, passwordResetToken);
+    await this.sendgridService.sendPasswordResetToken(findUser.email, passwordResetToken);
+
+    return updateUserById;
+  };
+
+  public resetPassword = async (userData:User): Promise<User> => {
+    if (!userData) throw new Error("user is empty");
+
+    const findUser = await this.users.findOne({ email: userData.email, passwordResetToken: userData.passwordResetToken });
+
+    if (!findUser) throw new Error("User doesn't exist");
+
+    const hashedPassword = await hash(userData.password, 10);
+
+    const updateUserById = await this.users.findByIdAndUpdate(findUser._id, { password: hashedPassword, passwordResetToken: "" });
+    if (!updateUserById) throw new Error("User doesn't exist");
 
     return updateUserById;
   };

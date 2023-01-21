@@ -8,14 +8,14 @@ class SendgridService {
     this.sgMail.setApiKey(SENDGRID_API_KEY);
   }
 
-  public sendPasswordResetToken = async (to:string, userId:string, token:string) => {
+  public sendPasswordResetToken = async (to:string, token:string) => {
     try{
       await this.sgMail.send({
         to,
         from: SENDGRID_EMAIL,
         subject: "Here's your password reset token",
-        test: `ID: ${userId} passwordResetToken: ${token}`,
-        html:`<p>ID: ${userId}<br/>passwordResetToken: ${token}</p>`,
+        test: `email: ${to} passwordResetToken: ${token}`,
+        html:`<p>email: ${to}<br/>passwordResetToken: ${token}</p>`,
       });
     } catch (error:any) {
       throw new Error(error);
