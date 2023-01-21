@@ -42,27 +42,27 @@ class ImageService {
       image = await this.image.findById(id);
     }
 
-    if(!image) return null;
+    if(!image || image.owner != user._id) return null;
 
     const res = await this.image.findByIdAndUpdate(id, { hits: image.hits + 1 });
 
     return res;
   }
 
-  public update = async (id:string, imageData:any, user:User) : Promise<Image> => {
+  public update = async (id:string, imageData:any, user:User) : Promise<Image|null> => {
     const image = await this.image.findById(id);
-    if(!image) throw new Error("not found");
+    if(!image) return null;
 
     if(user.role == "user"){
       delete imageData.owner;
     }
 
     if(user._id != image.owner){
-      return image;
+      return null;
     }
 
     const res = await this.image.findByIdAndUpdate(id, { ...imageData });
-    if(!res) throw new Error("not found");
+    return null;
 
     return res;
   }
@@ -81,6 +81,19 @@ class ImageService {
     }
 
     return await this.image.create({ ...imageData });
+  }
+
+  public delete = async (id:string, user:User) : Promise<Image|null> => {
+    const found = await this.image.findById(id);
+    if(!found) return null;
+
+    if(user.role == "user" && found && found.owner != user._id){
+      return null;
+    }
+
+    const res = await this.image.findByIdAndUpdate(id, { deleted: true });
+    if(!res) return null;
+    return res;
   }
   
 }

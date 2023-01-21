@@ -52,8 +52,17 @@ class ImageController {
       const data = req.body;
 
       const updateImage = await this.imageService.update(id, data, user);
+
+      if(!updateImage){
+
+        res.status(404).json({
+          message: "Not found"
+        });
+
+      } else {
       
-      res.status(201).json({ data: updateImage, message: "update" });
+        res.status(201).json({ data: updateImage, message: "update" });
+      }
 
     } catch (error) {
       next(error);
@@ -69,6 +78,28 @@ class ImageController {
       const createImage = await this.imageService.create(data, user);
       
       res.status(201).json({ data: createImage, message: "create" });
+
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public delete = async (req:any, res: Response, next: NextFunction) => {
+    try {
+      const id = req.params.id;
+      const user = req.user;
+
+      let deleteImage = await this.imageService.delete(id, user);
+      if(!deleteImage){
+
+        res.status(404).json({
+          message: "Not found"
+        });
+
+      } else {
+        deleteImage.deleted = true;
+        res.status(201).json({ data: deleteImage, message: "delete" });
+      }
 
     } catch (error) {
       next(error);
