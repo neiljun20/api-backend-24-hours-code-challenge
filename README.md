@@ -19,3 +19,14 @@ pnpm install
 pnpm build
 pnpm start
 ```
+
+### Available accounts:
+```
+admin account
+email: neiljuncataag@gmail.com
+password: A222aaa#1
+
+user account
+email: asddada@gmail.com
+password: A222aaa#1
+```
