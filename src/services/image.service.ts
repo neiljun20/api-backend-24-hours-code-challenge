@@ -34,7 +34,7 @@ class ImageService {
 
   public imagesId = async (id:string, user:User) : Promise<Image|null> => {
 
-    let image = null;
+    let image:any = null;
 
     if(user.role == "user"){
       image = await this.image.findOne({_id: id, deleted:false});
@@ -42,7 +42,7 @@ class ImageService {
       image = await this.image.findById(id);
     }
 
-    if(!image || image.owner != user._id) return null;
+    if(!image || user.role == "user" && image.owner != user._id) return null;
 
     const res = await this.image.findByIdAndUpdate(id, { hits: image.hits + 1 });
 
@@ -57,7 +57,7 @@ class ImageService {
       delete imageData.owner;
     }
 
-    if(user._id != image.owner){
+    if(user.role == "user" && user._id != image.owner){
       return null;
     }
 
