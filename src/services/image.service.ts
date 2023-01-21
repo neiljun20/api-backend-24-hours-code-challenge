@@ -24,21 +24,27 @@ class ImageService {
       return await this.image.create({
         owner,
         uri: cloud.url,
-        hits:1
+        hits:1,
+        deleted:false
       });
 
     }));
 
   }
 
-  public imagesId = async (id:string) : Promise<Image> => {
-    const image = await this.image.findById(id);
+  public imagesId = async (id:string, user:User) : Promise<Image|null> => {
 
-    if(!image) throw new Error("not found");
+    let image = null;
+
+    if(user.role == "user"){
+      image = await this.image.findOne({_id: id, deleted:false});
+    } else {
+      image = await this.image.findById(id);
+    }
+
+    if(!image) return null;
 
     const res = await this.image.findByIdAndUpdate(id, { hits: image.hits + 1 });
-
-    if(!res) throw new Error("not found");
 
     return res;
   }
@@ -68,6 +74,10 @@ class ImageService {
 
     if(!imageData.hits){
       imageData.hits = 1;
+    }
+
+    if(!imageData.hits){
+      imageData.deleted = false;
     }
 
     return await this.image.create({ ...imageData });

@@ -18,16 +18,27 @@ class ImageController {
     }
   };
 
-  public imagesId = async (req:Request, res: Response, next: NextFunction) => {
+  public imagesId = async (req:any, res: Response, next: NextFunction) => {
     try {
       const id = req.params.id;
-      const getImagesId = await this.imageService.imagesId(id);
+      const user = req.user;
+      const getImagesId = await this.imageService.imagesId(id, user);
+
+      if(!getImagesId){
+
+        res.status(404).json({
+          message: "Not found"
+        });
+
+      } else {
       
-      res.status(200).json({
-        id: getImagesId._id,
-        hits: getImagesId.hits + 1,
-        uri: getImagesId.uri
-      });
+        res.status(200).json({
+          id: getImagesId._id,
+          hits: getImagesId.hits + 1,
+          uri: getImagesId.uri
+        });
+
+      }
 
     } catch (error) {
       next(error);

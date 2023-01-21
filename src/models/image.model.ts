@@ -13,7 +13,11 @@ const imageSchema: Schema = new Schema({
   hits: {
     type: Number,
     required: true
-  }
+  },
+  deleted: {
+    type: Boolean,
+    required: false
+  },
 });
 
 const userModel = model<Image & Document>("Image", imageSchema);
