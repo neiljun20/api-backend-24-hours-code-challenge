@@ -75,7 +75,7 @@ class ImageService {
       imageData.hits = 1;
     }
 
-    if(!imageData.hits){
+    if(!imageData.deleted){
       imageData.deleted = false;
     }
 
