@@ -12,7 +12,7 @@ class ImageController {
       const ownerId = req.user._id;
       const getAllData = await this.imageService.images(ownerId, Number(limit));
       
-      res.status(200).json({ limit, data: getAllData, message: "images" });
+      res.status(200).json({ limit: getAllData.length, data: getAllData, message: "images" });
     } catch (error) {
       next(error);
     }

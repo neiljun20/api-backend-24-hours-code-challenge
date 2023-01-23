@@ -62,7 +62,6 @@ class ImageService {
     }
 
     const res = await this.image.findByIdAndUpdate(id, { ...imageData });
-    return null;
 
     return res;
   }
