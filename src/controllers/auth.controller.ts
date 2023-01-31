@@ -3,7 +3,7 @@ import { User } from "../interfaces/user.interface";
 import AuthService from "../services/auth.service";
 
 class AuthController {
-  private authService = new AuthService();
+  public authService = new AuthService();
 
   public signUp = async (req: Request, res: Response, next: NextFunction) => {
     try {
