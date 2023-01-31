@@ -3,11 +3,12 @@ import mongoose from 'mongoose';
 import supertest from 'supertest';
 import App from '../app';
 import AuthRoute from '../routes/auth.routes';
+import { SignUpUserInput } from '../schemas/auth.schema';
 
 describe('Testing Auth', () => {
   describe('[POST] /signup', () => {
     it('response should have the Create userData', async () => {
-      const userData = {
+      const userData: SignUpUserInput = {
         email: 'test@email.com',
         password: 'Qq1w2e3r4!',
         passwordConfirmation: 'Qq1w2e3r4!'
